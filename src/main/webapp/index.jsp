@@ -92,7 +92,7 @@
 
 <div style="margin-bottom: 20px">
   This is a template for a web application that uses Spring MVC and Hibernate. The sample code is a simple CRUD page
-  that manipulates records for a single model object. To try it out go to the <a href="/people/">people page</a>. Then
+  that manipulates records for a single model object. To try it out go to the <a href="/users/">people page</a>. Then
   use Eclipse or the Command Line to deploy some changes.
 </div>
 
@@ -334,7 +334,7 @@ c.orderBy(em.getCriteriaBuilder().asc(from.get("lastName")));
     <h1>Done!</h1>
 
     <p>You've just cloned, modified, and deployed a brand new app.</p>
-    <a href="/people/" class="btn btn-primary btn-large">See your changes</a>
+    <a href="/users/" class="btn btn-primary btn-large">See your changes</a>
 
     <p style="margin-top: 20px">Learn more at the
       <a href="http://devcenter.heroku.com/categories/java">Heroku Dev Center</a></p>
@@ -394,7 +394,7 @@ c.orderBy(em.getCriteriaBuilder().asc(from.get("lastName")));
     <h1>Done!</h1>
 
     <p>You've just cloned, modified, and deployed a brand new app.</p>
-    <a href="/people/" class="btn btn-primary btn-large">See your changes</a>
+    <a href="/users/" class="btn btn-primary btn-large">See your changes</a>
 
     <p style="margin-top: 20px">Learn more at the
       <a href="http://devcenter.heroku.com/categories/java">Heroku Dev Center</a></p>

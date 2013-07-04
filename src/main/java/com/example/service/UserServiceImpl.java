@@ -3,7 +3,7 @@ package com.example.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.model.Person;
+import com.example.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,28 +13,28 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Service
-public class PersonServiceImpl implements PersonService {
+public class UserServiceImpl implements UserService {
 
     @PersistenceContext
     EntityManager em;
         
     @Transactional
-    public void addPerson(Person person) {
-        em.persist(person);
+    public void addUser(User user) {
+        em.persist(user);
     }
 
     @Transactional
-    public List<Person> listPeople() {
-        CriteriaQuery<Person> c = em.getCriteriaBuilder().createQuery(Person.class);
-        c.from(Person.class);
+    public List<User> listUsers() {
+        CriteriaQuery<User> c = em.getCriteriaBuilder().createQuery(User.class);
+        c.from(User.class);
         return em.createQuery(c).getResultList();
     }
 
     @Transactional
-    public void removePerson(Integer id) {
-        Person person = em.find(Person.class, id);
-        if (null != person) {
-            em.remove(person);
+    public void removeUser(Integer id) {
+        User user = em.find(User.class, id);
+        if (null != user) {
+            em.remove(user);
         }
     }
     

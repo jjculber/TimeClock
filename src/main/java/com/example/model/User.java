@@ -4,6 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+import java.util.Set;
+
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+
 @Entity
 public class User {
 
@@ -42,7 +51,7 @@ public class User {
         this.passHash = passHash;
     }
 
-    public String getTimes() {
+    public Set<TimeClock> getTimes() {
         return times;
     }
 
@@ -59,7 +68,7 @@ public class User {
     }
     
     public int getMinutesLeft() {
-        return (8 * 60) - getHoursWorked();
+        return (8 * 60) - getMinutesWorked();
     }
     
     public String getTimeOff() {

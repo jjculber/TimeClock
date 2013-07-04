@@ -13,11 +13,15 @@ public class TimeClock {
 
     private long time;
 
-    public String getTime() {
+    public TimeClock() {
+        time = System.currentTimeMillis();
+    }
+
+    public long getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
