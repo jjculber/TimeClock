@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.model.User;
+import com.example.model.TimeClock;
 import com.example.service.UserService;
 
 import java.util.Map;
+import java.util.Calendar;
 
 @Controller
 public class UsersController {
@@ -59,7 +61,16 @@ public class UsersController {
     public String userStatus(@PathVariable("userId") Integer userId) {
 
 	// make service call to only get timestamps today
-        User user = userService.getUser(userId);
+	Calendar cal = Calendar.getInstance();
+	cal.set(Calendar.MILLISECOND, 0);
+	cal.set(Calendar.SECOND, 0);
+	cal.set(Calendar.MINUTE, 0);
+	cal.set(Calendar.HOUR_OF_DAY, 0);
+	long timeMin = cal.getTimeInMillis();
+	cal.add(Calendar.DATE, 1);
+	long timeMax = cal.getTimeInMillis();
+
+        User user = userService.getUser(userId, timeMin, timeMax);
 
         return "redirect:/users/";
     }

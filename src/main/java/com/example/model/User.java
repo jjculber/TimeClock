@@ -1,30 +1,18 @@
 package com.example.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 import java.util.Set;
 
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-
-@Entity
 public class User {
 
-    @Id
-    @GeneratedValue
     private Integer id;
 
     private String email;
     
     private String passHash;
     
-    @OneToMany(fetch = FetchType.EAGER)
     private Set<TimeClock> times;
 
     public Integer getId() {

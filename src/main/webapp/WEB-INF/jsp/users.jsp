@@ -41,10 +41,10 @@
             </div>
             <form:form method="post" action="add" commandName="user" class="form-vertical">
 
-                <form:label path="firstName">First Name</form:label>
-                <form:input path="firstName" />
-                <form:label path="lastName">Last Name</form:label>
-                <form:input path="lastName" />
+                <form:label path="email">email</form:label>
+                <form:input path="email" />
+                <form:label path="passHash">password</form:label>
+                <form:input path="passHash" />
                 <input type="submit" value="Add Person" class="btn"/>
             </form:form>
 
@@ -61,7 +61,7 @@
                     <tbody>
                     <c:forEach items="${usersList}" var="user">
                         <tr>
-                            <td>${user.lastName}, ${user.firstName}</td>
+                            <td>${user.email}, ${user.passHash}</td>
                             <td><form action="delete/${user.id}" method="post"><input type="submit" class="btn btn-danger btn-mini" value="Delete"/></form></td>
                         </tr>
                     </c:forEach>
