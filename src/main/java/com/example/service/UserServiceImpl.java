@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import java.util.List;
+import java.util.ArrayList;
 
 //@Service
 public class UserServiceImpl implements UserService {
@@ -59,15 +60,59 @@ return null;
        // }
     }
 
-    public User getUser(Integer id, long timeMin, long timeMax) {
-        //User user = em.find(User.class, id);
-	//return user;
-        return null;
+    public List<TimeClock> getUser(Integer userId, long timeMin, long timeMax) {
+         String sql = "SELECT time from times where userId = ? and time >= ? and time <= ?";
+         Connection conn = null;
+
+         List<TimeClock> times = new ArrayList<TimeClock>();
+
+         try {
+             conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ps.setInt(1, userId);
+             ps.setLong(2, timeMin);
+             ps.setLong(3, timeMax);
+             ResultSet result = ps.executeQuery();
+
+             while (result.next()) {
+                 long time = result.getLong("time");
+                 times.add(new TimeClock(time));
+             }
+
+
+             ps.close();
+         } catch (SQLException e) {
+             throw new RuntimeException(e);
+         } finally {
+             if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+             }
+         }
+        return times;
     }
 
     public void clockTime(Integer userId, TimeClock clock) {
-	
-	//em.persist(clock);
+         String sql = "INSERT INTO times (time, userId) VALUES (?,?)";
+         Connection conn = null;
+
+         try {
+             conn = dataSource.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ps.setLong(1, clock.getTime());
+             ps.setInt(2, userId);
+             ps.executeUpdate();
+             ps.close();
+         } catch (SQLException e) {
+             throw new RuntimeException(e);
+         } finally {
+             if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {}
+             }
+         }
     }
     
 }

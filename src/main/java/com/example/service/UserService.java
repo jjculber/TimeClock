@@ -11,6 +11,6 @@ public interface UserService {
     public void addUser(User user);
     public List<User> listUsers();
     public void removeUser(Integer id);
-    public User getUser(Integer id, long timeMin, long timeMax);
+    public List<TimeClock> getUser(Integer id, long timeMin, long timeMax);
     public void clockTime(Integer id, TimeClock clock);
 }
