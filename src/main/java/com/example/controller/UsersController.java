@@ -75,7 +75,8 @@ public class UsersController {
 
         Map<String, Object> json = new HashMap<String, Object>();
         // make service call to only get timestamps today
-        Calendar cal = Calendar.getInstance();
+        TimeZone timezone = TimeZone.getTimeZone("America/Los_Angeles");
+        Calendar cal = Calendar.getInstance(timezone);
         cal.set(Calendar.MILLISECOND, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MINUTE, 0);
