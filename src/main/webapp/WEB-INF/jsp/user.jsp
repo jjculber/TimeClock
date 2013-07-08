@@ -1,8 +1,6 @@
 <!doctype html>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
 <head>
@@ -14,12 +12,29 @@
 
 </head>
 
+<style>
+.btn {
+	background-color:#aaa;
+	border:0px;
+	width: 100%;
+	max-width: 400px;
+	height: 80px;
+}
+</style>
+
 <body>
-<form action="/users/${userId}/clock" method="get"><input type="submit" class="btn btn-danger btn-mini" value="Clock in/out"/></form>
+<form action="/users/${userId}/clock" method="get"><input type="submit" class="btn" value="Clock in/out"/></form>
 <br/>
 Status: ${status}<br/>
-<c:set var="timeOff" value="<%= new java.util.Date(estTimeOff)%>"/>
-Time off: <fmt:formatDate type="time" value="${timeOff}" /><br/>
+Time off: 
+<jsp:useBean id="dateValue" class="java.util.Date" />
+<jsp:setProperty name="dateValue" property="time" value="${estTimeOff}" />
+<fmt:formatDate value="${dateValue}" pattern="h:mm a" timeZone="US/Pacific" />
+<br />
+Worked so far:
+${fn:substringBefore(minutesWorkedToday / 60, '.')} hours
+${minutesWorkedToday % 60} minutes
+<br />
 
 </body>
 </html>
